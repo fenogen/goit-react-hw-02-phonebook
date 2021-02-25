@@ -17,7 +17,7 @@
   margin-bottom: 16px;
 }
 .TodoList__title:after {
-  content: "A simple React Todo List App";
+  content: "last updated: 2021.02.20";
   text-transform: none;
   font-size: 0.7rem;
   display: block;

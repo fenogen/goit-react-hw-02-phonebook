@@ -6,6 +6,7 @@ import '../../Todo/Todo.css'
 function ContactList(props) {
     return (
         <div>
+        <div className ="NewTodoForm">
             <h1>Contacts</h1>
             <input 
             className="NewTodoForm__name"
@@ -13,11 +14,18 @@ function ContactList(props) {
             name="title"
             placeholder="Enter the name"
             value=""/>
-            <ul className="Todo">   {/*Добавлен клас*/}
-                <li>Number #1
-                <span className="Todo__remove" >X</span>
+        </div>
+            <ol>
+                <li className="flex">
+                    <div className="Todo">
+                    <div>
+                        <p className="Todo__priority">Имя</p>
+                        <p className="Todo__author"> Номер телефона</p>
+                    </div>
+                        <span className="Todo__remove" >X</span>
+                        </div>
                 </li>
-                </ul>
+                </ol>
         </div>
     )
 }

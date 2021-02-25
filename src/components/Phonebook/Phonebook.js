@@ -65,7 +65,6 @@ class Phonebook extends Component {
       <h1 className="TodoList__title">Phonebook</h1>
       <Form/>
       <ContactList/>
-      
     </div>
     )
   }
