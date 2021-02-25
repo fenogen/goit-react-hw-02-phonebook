@@ -4,94 +4,119 @@ import "./Form.css";
 
 class Form extends Component {
 
-  //--------------------------------------> initialState - для сбрасывания значений в инпуте
-  initialState = {
-    title: "",
-    author: "",
-    priority: "Low",
-    agree: false
+//--------------------------------------> Для сбрасывания значений в инпуте
+  defaultState = {
+    name: '',
+    number: '',
   }
 
-  state ={
-    // title: "",
-    // author: "",
-    // priority: "Low",
-    // agree: false
-    ...this.initialState
-  }
-
-  //--------------------------------------> Отдельными ф-ями
-//   titleInputHeader = ({target}) => {             // Пример с деструктуризацией
-//     const {value} = target;
-//     // const value = input.value;
-//     this.setState({
-//       tatle: value
-//     })
-
+//   state ={
+//     // title: "",
+//     // author: "",
+//     // priority: "Low",
+//     // agree: false
+//     ...this.initialState
 //   }
 
-//   authorInputHeader = (e) => {                  // Пример без деструктуризацией
-//   const input = e.target;
-//   const value = input.value;
+state = {
+  name: '',
+  number: '',
+}
+
+//   //--------------------------------------> Отдельными ф-ями
+// //   titleInputHeader = ({target}) => {             // Пример с деструктуризацией
+// //     const {value} = target;
+// //     // const value = input.value;
+// //     this.setState({
+// //       tatle: value
+// //     })
+
+// //   }
+
+// //   authorInputHeader = (e) => {                  // Пример без деструктуризацией
+// //   const input = e.target;
+// //   const value = input.value;
+// //   this.setState({
+// //     author: value
+// //   })
+// // }
+
+// inputHeandler = ({target}) => {
+//   // const input = e.target;
+//   // const value = input.value;
+//   // const name = input.name;
+//   const {value, name, type} = target
 //   this.setState({
-//     author: value
-//   })
+//     [name]: type === "checkbox" ? !this.state.agree : value,
+//   });
 // }
 
-inputHeandler = ({target}) => {
-  // const input = e.target;
-  // const value = input.value;
-  // const name = input.name;
-  const {value, name, type} = target
+// ----------------------------> Ф-я отображения в инпуте текста
+fnInputTarget = (event) => {
+  console.log(event.target)
+  console.log(event.target.value)
+  const input = event.target
+  const value = input.value;
+  const name = input.name;
+
   this.setState({
-    [name]: type === "checkbox" ? !this.state.agree : value,
-  });
+    [name]: value
+  })
 }
 
-
-// ------------------------> Ф-я отправки
-handleSubmit =(e)=> {
-  e.preventDefault();
-
-  // ---------------------> Создание одного задания
-  if (this.state.agree) {
-  const singleTask = {
-    title: this.state.title,
-    author: this.state.author,
-    priority: this.state.priority,
-    id: Date.now(),
-    status: false
-  }
-  console.log(singleTask.id)
-
-  // ---------------------> Передали задание в общий перечень
-  this.props.addToList(singleTask)
-  //--------------------------------------> Запустили сбрасывание в инпуте значений (initialState)
-  this.setState({...this.initialState})
+// // ------------------------> Ф-я отправки одного контакта:
+fnSubmit = (event) => {
+  event.preventDefault();
+const item = {
+  id: Date.now(), // - подключить утилиту
+  status: true,
+  ...this.state
+ }
+ // ---------------------> Передали контакт в список (компонент выше)
+this.props.addToList(item)
+//--------------------------------------> Запустили сбрасывание в инпуте значений (initialState)
+this.setState({...this.defaultState})
 }
-}
+//   // ---------------------> Создание одного задания
+//   if (this.state.agree) {
+//   const singleTask = {
+//     title: this.state.title,
+//     author: this.state.author,
+//     priority: this.state.priority,
+//     id: Date.now(),
+//     status: false
+//   }
+
 
   render() {
 
     // const { title, author, priority, agree} = this.state
 
     return (
-      <form className="NewTodoForm"autoComplete="off">
+      <form 
+      className="NewTodoForm"
+      autoComplete="off"
+      onSubmit={this.fnSubmit}>
         <input 
           className="NewTodoForm__name"
           type="text"
-          name="title"
+          name="name"
           placeholder="Name"
-          value=""
+          value={this.state.name}
+          onChange={this.fnInputTarget}
         />
         <input
           className="NewTodoForm__name"
-          type="text"
-          name="author"
+          type="number"
+          name="number"
           placeholder="Number"
-          value=""
+          value={this.state.number}
+          onChange={this.fnInputTarget}
         />
-        <button className="NewTodoForm__submit" type="submit">
+        <button 
+        className="NewTodoForm__submit" 
+        type="submit"
+         >
           Add Todo
         </button>
       </form>
