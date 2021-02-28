@@ -1,60 +1,24 @@
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
+
+import { v4 as uuidv4 } from 'uuid';
 import React, { Component } from "react";
 import "./Form.css";
 
 class Form extends Component {
 
-//--------------------------------------> Для сбрасывания значений в инпуте
+//------------------------------> Для сбрасывания значений в инпуте
   defaultState = {
     name: '',
     number: '',
   }
-
-//   state ={
-//     // title: "",
-//     // author: "",
-//     // priority: "Low",
-//     // agree: false
-//     ...this.initialState
-//   }
 
 state = {
   name: '',
   number: '',
 }
 
-//   //--------------------------------------> Отдельными ф-ями
-// //   titleInputHeader = ({target}) => {             // Пример с деструктуризацией
-// //     const {value} = target;
-// //     // const value = input.value;
-// //     this.setState({
-// //       tatle: value
-// //     })
-
-// //   }
-
-// //   authorInputHeader = (e) => {                  // Пример без деструктуризацией
-// //   const input = e.target;
-// //   const value = input.value;
-// //   this.setState({
-// //     author: value
-// //   })
-// // }
-
-// inputHeandler = ({target}) => {
-//   // const input = e.target;
-//   // const value = input.value;
-//   // const name = input.name;
-//   const {value, name, type} = target
-//   this.setState({
-//     [name]: type === "checkbox" ? !this.state.agree : value,
-//   });
-// }
-
 // ----------------------------> Ф-я отображения в инпуте текста
 fnInputTarget = (event) => {
-  console.log(event.target)
-  console.log(event.target.value)
   const input = event.target
   const value = input.value;
   const name = input.name;
@@ -62,36 +26,40 @@ fnInputTarget = (event) => {
   this.setState({
     [name]: value
   })
-}
+  }
 
-// // ------------------------> Ф-я отправки одного контакта:
+  
+// -------------------------> Ф-я отправки одного контакта:
 fnSubmit = (event) => {
+  
+  //----------------------> Сбросили перезагрузку страницы
   event.preventDefault();
-const item = {
-  id: Date.now(), // - подключить утилиту
+  
+  //----------------------> Создали контакт
+  const item = {
+  id: uuidv4(),
   status: true,
   ...this.state
- }
- // ---------------------> Передали контакт в список (компонент выше)
-this.props.addToList(item)
-//--------------------------------------> Запустили сбрасывание в инпуте значений (initialState)
-this.setState({...this.defaultState})
+  }
+  
+  //----------------------> Добавляем контакт по условию:
+  const arrayOfContacts = this.props.contacts
+  const arrayOfNumbers = arrayOfContacts.map(item => item.number)
+  // const arrayOfNames = arrayOfContacts.map(item => item.name)
+  if (!arrayOfNumbers.includes(item.number)) {
+        this.props.addToList(item)
+        this.setState({ ...this.defaultState })
+  }
+  else {
+    alert(`Такой номер телефона ${item.number} уже есть в контактах`)
+  }
+ // ----------------------> Передали контакт в список (компонент выше)
+    // this.props.addToList(item)
+ //-----------------------> Запустили сбрасывание в инпуте значений (initialState)
+    // this.setState({...this.defaultState})
 }
-//   // ---------------------> Создание одного задания
-//   if (this.state.agree) {
-//   const singleTask = {
-//     title: this.state.title,
-//     author: this.state.author,
-//     priority: this.state.priority,
-//     id: Date.now(),
-//     status: false
-//   }
-
 
   render() {
-
-    // const { title, author, priority, agree} = this.state
-
     return (
       <form 
       className="NewTodoForm"
@@ -99,6 +67,7 @@ this.setState({...this.defaultState})
       onSubmit={this.fnSubmit}>
         <input 
           className="NewTodoForm__name"
+          required
           type="text"
           name="name"
           placeholder="Name"
@@ -107,6 +76,7 @@ this.setState({...this.defaultState})
         />
         <input
           className="NewTodoForm__name"
+          required
           type="number"
           name="number"
           placeholder="Number"
@@ -127,51 +97,30 @@ this.setState({...this.defaultState})
 
 export default Form;
 
-// render() {
+// =======================================================================================
+//--------------------------------------> Отдельными ф-ями
+//   titleInputHeader = ({target}) => {             // Пример с деструктуризацией
+//     const {value} = target;
+//     // const value = input.value;
+//     this.setState({
+//       tatle: value
+//     })
+//   }
 
-//   const { title, author, priority, agree} = this.state
-
-//   return (
-//     <form   
-//     onSubmit={this.handleSubmit}
-//     className="NewTodoForm"autoComplete="off">
-//       <input
-//       onChange={this.inputHeandler}
-//         className="NewTodoForm__name"
-//         type="text"
-//         name="title"
-//         placeholder="New Todo"
-//         value={title}
-//       />
-//       <input
-//        onChange={this.inputHeandler}
-//         className="NewTodoForm__name"
-//         type="text"
-//         name="author"
-//         placeholder="Author"
-//         value={author}
-//       />
-//       <select
-//       onChange={this.inputHeandler}
-//       value={priority} name="priority" className="NewTodoForm__select">
-//         <option value='' disabled hidden>
-//           Priority
-//         </option>
-//         <option value="Low">Low</option>
-//         <option value="Medium">Medium</option>
-//         <option value="High">High</option>
-//       </select>
-//       <label htmlFor="agree" className="confirm">
-//         <input
-//          onChange={this.inputHeandler}
-//         type="checkbox" id="agree" name="agree" checked={agree}/>
-//         Agree with our policy
-//       </label>
-//       <button disabled={!agree} className={agree ? "NewTodoForm__submit" : "NewTodoForm__submit-unactive"} type="submit">
-//         Add Todo
-//       </button>
-//     </form>
-//   );
-
+//   authorInputHeader = (e) => {                  // Пример без деструктуризацией
+//   const input = e.target;
+//   const value = input.value;
+//   this.setState({
+//     author: value
+//   })
 // }
+
+// inputHeandler = ({target}) => {
+//   // const input = e.target;
+//   // const value = input.value;
+//   // const name = input.name;
+//   const {value, name, type} = target
+//   this.setState({
+//     [name]: type === "checkbox" ? !this.state.agree : value,
+//   });
 // }

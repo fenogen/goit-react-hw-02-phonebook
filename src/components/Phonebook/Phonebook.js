@@ -6,102 +6,65 @@ import "./TodoList.css";
 
 
 class Phonebook extends Component {
-
-  // state= {
-  //   todoList: [],
-  //   type: "all"
-  // }
-
 state = {
-  contacts: [],
-  filter: '',
-  name: ''
+  contacts: [
+    // {name: 'test', number: '1111', id: 1}
+  ],
+  filterValue: '',
 }
 
-
-//----------------------------> Добавляет
+//----------------------------> Добавляет контакт
   addToList = (item) => {
     this.setState((prev) =>({
     contacts: [...prev.contacts, item],
-  }))
-  console.log('yes')
+    }))
+    console.log(`Добавили контакт ${item.name}`)
   }
 
+//----------------------------> Удаляет конаткт по id (через фильтр оставляет только те id которые не подходят указанному)
+  fnRemove = (id) => {
+    const newStateContacts = this.state.contacts.filter(item => item.id !== id);
+    this.setState({
+      contacts: newStateContacts
+    });
+    console.log(`Удалили контакт c id: ${id}`)
+  }
 
-//   removeFormList = (id) => {
-//     this.setState({
-//       todoList: this.state.todoList.filter((todo) => todo.id !== id),
-//     })
-//   }
+// ---------------------------> Ф-я отображения в инпуте текста
+  fnFilterTarget = (event) => {
+    this.setState({
+      filterValue: event.target.value
+      }
+    )
+  }
 
-//   editStatusTask = (id) => {
-//     this.setState({
-//       todoList: this.state.todoList.map(todo => (
-//         todo.id === id ? {...todo, status: !todo.status} : todo
-//       ),)
-//   });
-//   }
+// ---------------------------> Ф-я поиска контакта по его имени
+  fnFindContact = () => {
+    const normalizeValue = this.state.filterValue.toLowerCase()
+    const findContact = this.state.contacts.filter(item => item.name.toLowerCase().includes(normalizeValue))
+    return findContact;
+  }
 
+  render() {
 
-
-//   changeFilter = ({target}) => {
-//     const type = target.dataset.filter;
-//     this.setState ({
-//       type,
-//     })
-//   }
-
-//   filterTask =() => {
-//     switch(this.state.type) {
-//       case "all":
-//         return this.state.todoList;
-//       case "completed":
-//           return this.state.todoList.filter(todo => todo.status === true);
-//       case "uncompleted" : 
-//           return this.state.todoList.filter(todo => todo.status === false);
-//       default:
-//             return this.state.todoList;
-//     }
-//   }
-
-
-  
-  render(){
+    //-------> Переменная для рендера фильтра 
+    const renderFilter = this.fnFindContact();
 
     return(
-      <div className="TodoList">
-      <h1 className="TodoList__title">Phonebook</h1>
+      <div className="List">
+      <h1 className="List__title">Phonebook</h1>
       <Form
-      addToList={this.addToList} />
-      <Filter/>
-      <ContactList
-      contact={this.state.contacts}
-      addToList={this.addToList}
-      editStatusTask={this.editStatusTask}/>
+          addToList={this.addToList}
+          contacts={this.state.contacts}/>
+        <Filter
+          filterValue={this.filterValue}
+          fnFilterTarget={this.fnFilterTarget}/>
+        <ContactList
+          contacts={renderFilter}                   //----> до фильтра был this.state.contacts
+          fnRemove={this.fnRemove}/>
     </div>
     )
   }
 }
-
-
-// {this.filterTask().map((todo) => (
-//   <li key={todo.id}>
-//     <Todo
-//     {...todo} 
-//     removeFormList={this.removeFormList} 
-//     editStatusTask={this.editStatusTask}/>
-//   </li>
-// ))}
-
-// <div className="filters">
-// <button  onClick={this.changeFilter} className="NewTodoForm__submit" data-filter="all">
-//   All
-// </button>
-// <button  onClick={this.changeFilter} className="NewTodoForm__submit" data-filter="completed">
-//   Completed
-// </button>
-// <button  onClick={this.changeFilter} className="NewTodoForm__submit" data-filter="uncompleted">
-//   Uncompleted
-// </button>
 
 export default Phonebook;
