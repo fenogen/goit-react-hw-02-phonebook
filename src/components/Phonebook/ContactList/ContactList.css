@@ -1,6 +1,4 @@
-
-
-.Todo {
+.item {
   display: flex;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.2);
@@ -10,26 +8,26 @@
   animation: scale-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
   justify-content: space-between;
 }
-.Todo > * {
+.item > * {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.Todo > *:hover {
+.item > *:hover {
   transform: scale(1.3);
 }
-.Todo__name,
-.Todo__priority,
-.Todo__author {
+.item__name,
+.item__priority,
+.item__author {
   position: relative;
 }
-.Todo__name.done,
-.Todo__priority.done,
-.Todo__author.done {
+.item__name.done,
+.item__priority.done,
+.item__author.done {
   color: #c8d6e5;
 }
-.Todo__name.done::after,
-.Todo__priority.done::after,
-.Todo__author.done::after {
+.item__name.done::after,
+.item__priority.done::after,
+.item__author.done::after {
   content: "";
   width: 110%;
   height: 2px;
@@ -42,14 +40,30 @@
   animation: line-through 0.1s ease;
 }
 
-.Todo__priority {
+.item__priority {
   font-size: 12px;
   margin-top: 5px;
 }
 
-.Todo__author {
+.item__author {
   font-size: 10px;
   margin-top: 5px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-position {
+  margin-left: 25px;
+  margin-right: 50px;
+  margin-top: 0px;
+}
+
+.filter-title {
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 
 @keyframes line-through {

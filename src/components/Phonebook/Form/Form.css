@@ -1,4 +1,4 @@
-.NewTodoForm {
+.newForm {
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -6,13 +6,13 @@
   margin-top: auto;
   flex-wrap: wrap;
 }
-.NewTodoForm > * {
+.newForm > * {
   font-family: inherit;
   outline: none;
   border-radius: 1px;
   padding: 8px 16px;
 }
-.NewTodoForm__name {
+.newForm__name {
   border: none;
   background-color: #fff;
   color: #333;
@@ -20,7 +20,7 @@
   margin-bottom: 10px;
 }
 
-.NewTodoForm__select {
+.newForm__select {
   border: none;
   background-color: #fff;
   color: #333;
@@ -29,7 +29,7 @@
   height: 30px;
 }
 
-.NewTodoForm__submit {
+.newForm__submit {
   border: 1px solid #fff;
   color: #fff;
   background-color: transparent;
@@ -39,7 +39,7 @@
   transition: all 0.2s ease;
 }
 
-.NewTodoForm__submit-unactive {
+.newForm__submit-unactive {
   border: 1px solid #fff;
   color: #fff;
   background-color: transparent;
@@ -50,7 +50,7 @@
   transition: all 0.2s ease;
 }
 
-.NewTodoForm__submit:hover {
+.newForm__submit:hover {
   background-color: #fff;
   color: #ff6b6b;
 }

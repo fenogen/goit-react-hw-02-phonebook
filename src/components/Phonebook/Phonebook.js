@@ -1,8 +1,8 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import Form from "./Form/Form";
 import Filter from './Filter/Filter'
 import ContactList from './ContactList/ContactList'
-import "./TodoList.css";
+import "./Phonebook.css";
 
 
 class Phonebook extends Component {
@@ -51,8 +51,8 @@ state = {
     const renderFilter = this.fnFindContact();
 
     return(
-      <div className="List">
-      <h1 className="List__title">Phonebook</h1>
+      <div className="list">
+      <h1 className="list__title">Phonebook</h1>
       <Form
           addToList={this.addToList}
           contacts={this.state.contacts}/>

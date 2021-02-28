@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import "../Form/Form.css";
 
 function Filter({filterValue, fnFilterTarget}) {
 
     return (
-        <div className ="NewTodoForm">
-            <h1>Contacts</h1>
+        <div className ="newForm">
+            <h2 className="filter-title">Contacts</h2>
             <input 
-                className="NewTodoForm__name"
+                className="newForm__name"
                 type="text"
                 name="title"
                 placeholder="Find contacts by name"
@@ -18,7 +19,8 @@ function Filter({filterValue, fnFilterTarget}) {
 }
 
 Filter.propTypes = {
-
+    filterValue: PropTypes.string,
+    fnFilterTarget: PropTypes.func,
 }
 
 export default Filter

@@ -10,13 +10,13 @@
   flex-direction: column;
   margin-top: 64px;
 }
-.List__title {
+.list__title {
   font-size: 2.5rem;
   font-weight: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
 }
-.TodoList__title:after {
+.list__title:after {
   content: "last updated: 2021.02.20";
   text-transform: none;
   font-size: 0.7rem;
@@ -24,17 +24,17 @@
   margin-left: 0.4rem;
   padding-bottom: 8px;
 }
-.TodoList__todos {
+.list__todos {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   list-style: none;
 }
-.TodoList__todos li {
+.list__todos li {
   width: 100%;
 }
-.TodoList__todos li:last-child {
+.list__todos li:last-child {
   margin-bottom: 32px;
 }
 

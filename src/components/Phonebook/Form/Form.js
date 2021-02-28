@@ -62,11 +62,11 @@ fnSubmit = (event) => {
   render() {
     return (
       <form 
-      className="NewTodoForm"
+      className="newForm"
       autoComplete="off"
       onSubmit={this.fnSubmit}>
         <input 
-          className="NewTodoForm__name"
+          className="newForm__name"
           required
           type="text"
           name="name"
@@ -75,7 +75,7 @@ fnSubmit = (event) => {
           onChange={this.fnInputTarget}
         />
         <input
-          className="NewTodoForm__name"
+          className="newForm__name"
           required
           type="number"
           name="number"
@@ -84,10 +84,10 @@ fnSubmit = (event) => {
           onChange={this.fnInputTarget}
         />
         <button 
-        className="NewTodoForm__submit" 
+        className="newForm__submit" 
         type="submit"
          >
-          Add Todo
+          Add contact
         </button>
       </form>
     );

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../../Todo/Todo.css'
+import './ContactList.css'
 
 function ContactList({ contacts, fnRemove }) {
 
@@ -8,13 +8,13 @@ function ContactList({ contacts, fnRemove }) {
         <div>
             {contacts.map(contact => (
                 <ul key={contact.id}>
-                    <li className="flex">
-                        <div className="Todo">
-                            <div>
-                                <p className="Todo__priority">{contact.name}</p>
-                                <p className="Todo__author">{contact.number}</p>
+                    <li>
+                        <div className="item">
+                            <div className="flex">
+                                <p className="item__name flex-position">{contact.name}</p>
+                                <p className="item__priority flex-position">{contact.number}</p>
                             </div>
-                            <span onClick={() => fnRemove(contact.id)} className="Todo__remove">X</span>
+                            <span onClick={() => fnRemove(contact.id)} className="item__remove">X</span>
                         </div>
                     </li>
                 </ul>
@@ -24,7 +24,8 @@ function ContactList({ contacts, fnRemove }) {
 }
 
 ContactList.propTypes = {
-
+    contacts: PropTypes.array,
+    fnRemove: PropTypes.func,
 }
 
 export default ContactList
