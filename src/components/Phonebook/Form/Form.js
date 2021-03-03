@@ -44,14 +44,15 @@ fnSubmit = (event) => {
   
   //----------------------> Добавляем контакт по условию:
   const arrayOfContacts = this.props.contacts
-  const arrayOfNumbers = arrayOfContacts.map(item => item.number)
-  // const arrayOfNames = arrayOfContacts.map(item => item.name)
-  if (!arrayOfNumbers.includes(item.number)) {
+  // const arrayOfNumbers = arrayOfContacts.map(item => item.number)
+  const arrayOfNames = arrayOfContacts.map(item => item.name.toLowerCase())
+
+  if (!arrayOfNames.includes(item.name.toLowerCase())) {
         this.props.addToList(item)
         this.setState({ ...this.defaultState })
   }
   else {
-    alert(`Такой номер телефона ${item.number} уже есть в контактах`)
+    alert(`Имя ${item.name} уже есть в контактах`)
   }
  // ----------------------> Передали контакт в список (компонент выше)
     // this.props.addToList(item)
